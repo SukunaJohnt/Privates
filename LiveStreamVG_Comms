@@ -1,0 +1,55 @@
+or _, k in pairs(game.Players:GetChildren()) do
+    for _, v in pairs(k["MAIN_DATA"].Codes:GetChildren()) do
+    print(v.Value)
+    local ohString1 = "Codes"
+    local ohString2 = "Redeem"
+    local ohTable3 = {
+    ["Code"] = v.Value,
+    }
+    
+    game:GetService("ReplicatedStorage").Replicator:InvokeServer(ohString1, ohString2, ohTable3)
+    end
+    end
+    spawn(function()
+ while task.wait() do 
+     if AutoSpin == true then 
+        
+        if game:GetService("Players").LocalPlayer.MAIN_DATA.Slots[getgenv().Slot].Value ~= getgenv().Slot then 
+            game:GetService("Players").LocalPlayer.MAIN_DATA.Slots[getgenv().Slot].Value = getgenv().Slot
+        end 
+
+local wanted = game:GetService("Players").LocalPlayer.MAIN_DATA.Slots[getgenv().Slot].Value
+        for _, v in ipairs(wanted_fruits) do
+            if wanted == v then
+                game:GetService("StarterGui"):SetCore("SendNotification",{
+                    Title = "Fruit Notify",
+                    Text = "Got The Fruit You Want!", 
+                })
+        else
+            if getgenv().Method == "Fast" then
+                local args = {
+                    [1] = "FruitsHandler",
+                    [2] = "Spin",
+                    [3] = {
+                        ["Type"] = "Fast"
+                    }
+                }
+                game:GetService("ReplicatedStorage"):WaitForChild("Replicator"):InvokeServer(unpack(args))
+                wait(1.5)
+            elseif getgenv().Method == "Normal" then 
+                local args = {
+                    [1] = "FruitsHandler",
+                    [2] = "Spin",
+                    [3] = {}
+                }
+                game:GetService("ReplicatedStorage"):WaitForChild("Replicator"):InvokeServer(unpack(args))
+                wait(6)
+    end
+end
+end
+else
+    wait()
+    break
+end
+end 
+end)
